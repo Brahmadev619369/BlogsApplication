@@ -32,7 +32,7 @@ function Homecards({posts}) {
                         <img src={`${import.meta.env.VITE_EXPRESS_ASSETS_URL}/public/${post.creator?.profileURL}`} alt="Creator" />
                     </div>
                     <p>{post.creator?.fullName} </p>
-                    <p>{moment(post?.createdAt).fromNow()}</p>
+                    <p style={{fontSize:"11px"}}>{moment(post?.createdAt).fromNow()}</p>
                 </div>
             </div>
         </div>
