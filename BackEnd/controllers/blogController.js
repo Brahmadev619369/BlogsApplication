@@ -170,7 +170,9 @@ const editBlog = async (req, res, next) => {
             //     return res.status.send("Blog not updated")
             // }
             // delete old coverimg from cloud
-            await deleteProfileOnCloudinary(old_coverImgPublicId)
+            if(old_coverImgPublicId){
+                await deleteProfileOnCloudinary(old_coverImgPublicId)
+            }
             return res.status(200).json(updateBlog);
 
         }

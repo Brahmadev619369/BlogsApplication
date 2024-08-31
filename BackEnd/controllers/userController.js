@@ -8,6 +8,7 @@ const { use } = require("../routes/userRoutes");
 const mongoose = require("mongoose");
 const crypto = require("crypto")
 const nodemailer = require("nodemailer");
+const {uploadOnCloudinary,deleteProfileOnCloudinary} = require("../utils/cloudinary")
 
 const validatePassword = (password) => {
     const minLength = 8;
@@ -246,7 +247,7 @@ const changeProfile = async (req, res) => {
 
         // store old profile public id
         const old_public_id = user.profile_public_id
-        console.log("oldpublicID",old_public_id);
+        // console.log("oldpublicID",old_public_id);
         
 
         // new profile response
@@ -260,7 +261,9 @@ const changeProfile = async (req, res) => {
             return res.statu(400).send({ error: "Profile couldn't be changed" });
         }
         // after successfully updation delete old img from cloud
-        await deleteProfileOnCloudinary(old_public_id)
+        if(old_public_id){
+            await deleteProfileOnCloudinary(old_public_id)
+        }
         res.status(200).json(updateProfile);
 
     } catch (error) {
