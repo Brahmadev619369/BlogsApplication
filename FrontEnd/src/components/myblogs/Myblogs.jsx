@@ -114,7 +114,7 @@ function Myblogs() {
             blogs.map(blog => {
               return <div key={blog._id} className="myblogCard">
                 <div className="myblogDetails">
-                  <img src={`${import.meta.env.VITE_EXPRESS_ASSETS_URL}/public/${blog.coverImgUrl}`} alt="" />
+                  <img src={blog.coverImgUrl} alt="" />
                   <p>{blog.title}</p>
                 </div>
 

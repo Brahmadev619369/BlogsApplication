@@ -8,7 +8,7 @@ import Spinner from "../svg/Spinner"
 function Cards() {
   const [isLoading,setIsLoading] = useState(false)
   const [posts, setPosts] = useState([])
-  console.log(import.meta.env.VITE_EXPRESS_ASSETS_URL);
+  // console.log(import.meta.env.VITE_EXPRESS_ASSETS_URL);
 
 
   

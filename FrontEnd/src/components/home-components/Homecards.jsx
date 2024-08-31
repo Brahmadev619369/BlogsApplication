@@ -10,7 +10,7 @@ function Homecards({posts}) {
 {posts.map((post)=>(
             <div key={post._id} className="homeCard">
             <div className="main">
-                <img className='cardImg' src={`${import.meta.env.VITE_EXPRESS_ASSETS_URL}/public/${post.coverImgUrl}`} alt="NFT" />
+                <img className='cardImg' src={post.coverImgUrl} alt="NFT" />
                 <h2 className="cardtitle">{post.title}</h2>
                 {/* <p className='description'>{post.description}</p> */}
                 <div className='description' dangerouslySetInnerHTML={{ __html: post.description}} />
@@ -29,7 +29,7 @@ function Homecards({posts}) {
                 <hr />
                 <div className="author">
                     <div className='wrapper'>
-                        <img src={`${import.meta.env.VITE_EXPRESS_ASSETS_URL}/public/${post.creator?.profileURL}`} alt="Creator" />
+                        <img src={post.creator?.profileURL} alt="Creator" />
                     </div>
                     <p>{post.creator?.fullName} </p>
                     <p style={{fontSize:"11px"}}>{moment(post?.createdAt).fromNow()}</p>

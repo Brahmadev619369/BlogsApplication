@@ -223,7 +223,9 @@ const getAuthor = async (req, res, next) => {
 // POST: api/user/change-profile
 const changeProfile = async (req, res) => {
     try {
-        const profile = req.file;
+        const profile = req.file?.path;
+        // console.log("user profile : ",profile);
+        
 
 
         if (!profile) {
@@ -233,29 +235,39 @@ const changeProfile = async (req, res) => {
         const id = req.user.id; // Assuming authmiddleware sets req.user
         const user = await User.findById(id);
 
-        // Remove old profile if it's not the default image
-        if (user.profileURL && user.profileURL !== 'Images/profile.png') {
-            fs.unlink(path.join(__dirname, '..', 'public', user.profileURL), (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-        }
+        // // Remove old profile if it's not the default image
+        // if (user.profileURL && user.profileURL !== 'Images/profile.png') {
+        //     fs.unlink(path.join(__dirname, '..', 'public', user.profileURL), (err) => {
+        //         if (err) {
+        //             console.error(err);
+        //         }
+        //     });
+        // }
+
+        // store old profile public id
+        const old_public_id = user.profile_public_id
+        console.log("oldpublicID",old_public_id);
+        
+
+        // new profile response
+        const profiles = await uploadOnCloudinary(profile)
+        
 
         // Update in DB
-        const updateProfile = await User.findByIdAndUpdate(id, { profileURL: `Images/${profile.filename}` }, { new: true });
+        const updateProfile = await User.findByIdAndUpdate(id, { profileURL: profiles.url,profile_public_id:profiles.public_id }, { new: true });
 
         if (!updateProfile) {
             return res.statu(400).send({ error: "Profile couldn't be changed" });
         }
-
+        // after successfully updation delete old img from cloud
+        await deleteProfileOnCloudinary(old_public_id)
         res.status(200).json(updateProfile);
+
     } catch (error) {
         console.error(error); // Log the error
         res.status(500).send({ error: error.message });
     }
 };
-
 
 const editUser = async (req, res, next) => {
     try {

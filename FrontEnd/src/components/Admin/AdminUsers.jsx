@@ -85,7 +85,7 @@ headers:{
                     users.map(user => (
                         <div className='adminUser' key={user._id}>
                             <div className="userImg">
-                                <img src={user.profileURL ? `${import.meta.env.VITE_EXPRESS_ASSETS_URL}/public/${user.profileURL}` : img} alt={user.fullName} />
+                                <img src={user.profileURL} alt={user.fullName} />
                             </div>
                             <div className="nameBtn">
                                 <div className="adminauthor">{user.fullName}</div>

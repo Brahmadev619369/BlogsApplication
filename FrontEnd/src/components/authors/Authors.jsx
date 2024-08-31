@@ -37,7 +37,7 @@ function Authors() {
       {
         authors.map(({ _id, profileURL, fullName }) => (
           <Link to={`/blogs/users/${_id}`} key={_id} className="user_contain_card">
-              <img src={`${import.meta.env.VITE_EXPRESS_ASSETS_URL}/public/${profileURL}`} alt="" />
+              <img src={profileURL} alt="" />
             <div className="name">
               {fullName}
             </div>

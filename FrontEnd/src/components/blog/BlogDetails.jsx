@@ -112,7 +112,7 @@ console.log("HEYTHIS IS BLOGDET",PostId);
           <h1>{blogDetails.title}</h1>
         </div>
         <div className="coverImg">
-          <img src={`${import.meta.env.VITE_EXPRESS_ASSETS_URL}/public/${blogDetails.coverImgUrl}`} alt={blogDetails.title} />
+          <img src={blogDetails.coverImgUrl} alt={blogDetails.title} />
         </div>
         <div className="blog_content">
           <div className='blogDetailsPara' dangerouslySetInnerHTML={{ __html: blogDetails.description }} />

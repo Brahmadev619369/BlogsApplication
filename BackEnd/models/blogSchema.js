@@ -30,6 +30,9 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required:true
     },
+    converImgPublicId : {
+        type:String
+    }
 }, { timestamps: true });
 
 const Blog = mongoose.model("Blog", blogSchema);

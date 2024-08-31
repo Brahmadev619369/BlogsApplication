@@ -144,3 +144,10 @@
     margin: 0.5rem 0;
     height: 48px;
 }
+
+
+@media (max-width:500px) {
+    .author p{
+        font-size: 12px;
+    }
+}

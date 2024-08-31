@@ -18,6 +18,9 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:"Images/profile.png"
     },
+    profile_public_id :{
+        type:String
+    },
     role: {
         type:String,
         enum:["User","Admin"],

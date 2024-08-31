@@ -5,12 +5,15 @@ const User = require("../models/userSchema");
 const Blog = require("../models/blogSchema");
 const { param } = require("../routes/userRoutes");
 const mongoose = require("mongoose");
+const {uploadOnCloudinary,deleteProfileOnCloudinary} = require("../utils/cloudinary")
 
 // POST: api/blogs
 const addBlog = async (req, res, next) => {
     try {
         const { title, category, description } = req.body
-        const coverImg = req.file
+        const coverImg = req.file?.path
+        console.log(coverImg);
+        
         if (!title || !category || !description) {
             return res.status(400).send({ error: "All fields are required" });
         }
@@ -18,12 +21,18 @@ const addBlog = async (req, res, next) => {
         if (!coverImg) {
             return res.status(400).send({ error: "Please choose an CoverImg" });
         }
+
+        const coverImgDetails = await uploadOnCloudinary(coverImg)
+        // console.log(coverImg_url);
+        
+
         const blog = await Blog.create({
             title,
             category,
             description,
             creator: req.user.id,
-            coverImgUrl: `CoverImg/${coverImg.filename}`
+            coverImgUrl: coverImgDetails.url,
+            converImgPublicId : coverImgDetails.public_id
         })
         res.status(200).json(blog);
         // console.log(req.user);
@@ -124,7 +133,9 @@ const editBlog = async (req, res, next) => {
         }
         // console.log(title);
 
-        const coverImg = req.file
+        const coverImg = req.file?.path
+        // console.log("editCover",coverImg);
+        
 
         if (!coverImg) {
             updateBlog = await Blog.findByIdAndUpdate(_id, { title, category, description }, { new: true })
@@ -133,23 +144,33 @@ const editBlog = async (req, res, next) => {
         else {
             // delete old coverImg
             oldBlog = await Blog.findById({ _id })
-            fs.unlink(path.join(__dirname, "..", "public", oldBlog.coverImgUrl), async (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            })
-
+            // below comments code for localty store or temp store imgs
+            // fs.unlink(path.join(__dirname, "..", "public", oldBlog.coverImgUrl), async (err) => {
+            //     if (err) {
+            //         console.error(err);
+            //     }
+            // })
+            
+            const old_coverImgPublicId = oldBlog.converImgPublicId
+            const coverImgDetails = await uploadOnCloudinary(coverImg)
+            // console.log(coverImgDetails);   
+            
             // upload new coverImg and update
             updateBlog = await Blog.findByIdAndUpdate(_id,
                 {
                     title,
                     category,
                     description,
-                    coverImgUrl: `CoverImg/${coverImg.filename}`
+                    coverImgUrl: coverImgDetails.url,
+                    converImgPublicId : coverImgDetails.public_id
                 },
                 { new: true }
             )
-
+            // if (!updateBlog){
+            //     return res.status.send("Blog not updated")
+            // }
+            // delete old coverimg from cloud
+            await deleteProfileOnCloudinary(old_coverImgPublicId)
             return res.status(200).json(updateBlog);
 
         }

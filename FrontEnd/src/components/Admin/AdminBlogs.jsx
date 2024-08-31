@@ -84,7 +84,7 @@ function AdminBlogs() {
                 blogs.map(blog => (
                     <div className='adminCard' key={blog._id}>
                         <div className="coverImg">
-                            <img src={`${import.meta.env.VITE_EXPRESS_ASSETS_URL}/public/${blog.coverImgUrl}`} alt="" />
+                            <img src={blog.coverImgUrl} alt="" />
                         </div>
 
                         <div className="title-author">

@@ -124,7 +124,7 @@ function UserProfile() {
     {error && <div style={{color:"orange",margin:"5px"}}>{error}</div>}
 
         <div className="profile-avatar">
-          <img src={`${import.meta.env.VITE_EXPRESS_ASSETS_URL}/public/${user.profileURL}`} alt="User Avatar" />
+          <img src={user.profileURL} alt="User Avatar" />
         </div>
         <form className='avatar-form' onSubmit={handleToUpdatePicture}>
           <input
