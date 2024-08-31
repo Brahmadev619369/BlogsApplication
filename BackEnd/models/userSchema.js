@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     },
     profileURL: {
         type:String,
-        default:"Images/profile.png"
+        default:"https://res.cloudinary.com/dfmrenz0g/image/upload/v1725126444/profile_e0ehtz.png"
     },
     profile_public_id :{
         type:String
