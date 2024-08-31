@@ -32,7 +32,7 @@ const Carousel = ({ posts = [] }) => {
             className="carousel-item"
             key={post._id}
             style={{
-              backgroundImage: url(post.coverImgUrl),// Set the background image
+              backgroundImage: `url(${post.coverImgUrl})`,// Set the background image
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
