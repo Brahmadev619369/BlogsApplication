@@ -10,7 +10,7 @@ function Card({ PostId, coverImg, author, title, body, category,createdAt }) {
         <div className="cards">
             <div className="left">
                 <div className="img">
-                    <img src= {`${import.meta.env.VITE_EXPRESS_ASSETS_URL}/public/${coverImg}`} alt='' />
+                    <img src= {coverImg} alt='' />
                 </div>
             </div>
             <div className="right">
