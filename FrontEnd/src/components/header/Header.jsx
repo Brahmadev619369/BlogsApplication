@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react'
+import React, { useState,useContext, useEffect,useRef } from 'react'
 import { NavLink, Link } from "react-router-dom"
 import "./header.css"
 import Menu from '../svg/Menu';
@@ -13,6 +13,8 @@ function Header() {
     const {auth,logout} = useContext(AuthContext)
     const [showConfirm,setShowConfirm] = useState(false)
     const navigate = useNavigate()
+    const menuRef = useRef()
+    const btnRef = useRef()
 
 
     
@@ -24,10 +26,29 @@ function Header() {
     const closeNav = () =>{
         setIsOpen(false)
     }
+// click anywhere to close menu bar
+useEffect(() => {
+    const closeNavOnBody = (e) => {
+        if(!menuRef.current.contains(e.target) && !btnRef.current.contains(e.target)){
+            setIsOpen(false);
+        }
+        console.log(e.target);
+        
+        
+    };
+    document.body.addEventListener("mousedown", closeNavOnBody);
 
+    // Cleanup function to remove the event listener
+    return () => document.body.removeEventListener("mousedown", closeNavOnBody);
+}, []);
+
+
+// logout 
     const handleLogout = () => {
         setShowConfirm(true); // Show confirmation message
         setIsOpen(false)
+        console.log(isOpen);
+        
     };
 
     const handleConfirmLogout = () => {
@@ -40,7 +61,7 @@ function Header() {
         setShowConfirm(false); // Hide the confirmation message
     };
     
-console.log("header auth",auth);
+// console.log("header auth",auth);
 
     return (
         <header className='navbar'>
@@ -51,7 +72,7 @@ console.log("header auth",auth);
                     
                 </div>
 
-                <div className={`nav-menu ${isOpen ? "open":''}`}>
+                <div className={`nav-menu ${isOpen ? "open":''}`} ref={menuRef}>
                     {/* Links visible to everyone */}
                     
                     <NavLink to="/" className={({isActive})=>`${isActive?"active-text":"text"} navlink`} onClick={closeNav}>
@@ -112,7 +133,7 @@ console.log("header auth",auth);
                 </div>
 
 
-                    <button onClick={toggleNav} 
+                    <button onClick={toggleNav} ref={btnRef}
                     className='menu-btn'>
                         <Menu/>
                     </button>

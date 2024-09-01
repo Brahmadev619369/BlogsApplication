@@ -96,7 +96,7 @@
             border: 1px solid #ffffff22;
             padding: .3rem;
             margin: 0;
-            margin-right: .5rem;
+            /* margin-right: .5rem; */
             border-radius: 100%;
             box-shadow: inset 0 0 0 4px #000000aa;
 
@@ -127,18 +127,17 @@
 .description h2,
 .description h3,
 .description p {
-    font-size: 1rem; /* Uniform font size */
-    font-weight: 100; /* Uniform font weight */
+    font-size: 1rem; 
+    font-weight: 100; 
      margin: 0;
-    
-    /* Clamping to 2 lines */
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.5rem; /* Ensures 2 lines fit */
-    max-height: 3rem; /* Height to accommodate exactly 2 lines */
+    line-height: 1.5rem;
+    max-height: 3rem;
+    text-transform: capitalize;
 }
 .description{
     margin: 0.5rem 0;

@@ -5,12 +5,16 @@ import 'react-quill/dist/quill.snow.css';
 import "../addblogs/addBlog.css";
 import { AuthContext } from '../contexts/AuthContext';
 import axios from 'axios';
+import Spinner from "../svg/Spinner"
+import Message from "../confirm_loader/Message"
 
 function EditBlog() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
     const [coverImgUrl, setCoverImgUrl] = useState('')
+    const [message,setMessage] = useState("")
+    const [isSubmitting,setIsSubmitting] = useState(false)
     const PostId = useParams()
 
     const { auth } = useContext(AuthContext);
@@ -75,6 +79,7 @@ function EditBlog() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true)
         const formData = new FormData();
         formData.append("title", title)
         formData.append("category", category)
@@ -94,8 +99,12 @@ function EditBlog() {
                     }
                 }
             )
-            alert("Blog Updated Successfully")
-            navigate("/blogs")
+            setIsSubmitting(false)
+            // alert("Blog Updated Successfully")
+            setMessage("Blog Updated Successfully")
+            setTimeout(()=>{
+                navigate("/blogs")
+            },1000)
         }
         catch (error) {
             console.log("blog details not fetched", error)
@@ -134,8 +143,14 @@ function EditBlog() {
                     />
                 </div>
 
-                <input className='blog-sub-btn' type="submit" />
+                <input className='blog-sub-btn' type="submit" disabled={isSubmitting}/>
+                {isSubmitting &&(
+          <Spinner/>
+        )}
             </form>
+            {message &&(
+        <Message message={message}/>
+      )}
         </div>
     );
 }

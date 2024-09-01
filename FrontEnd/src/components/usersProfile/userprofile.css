@@ -36,11 +36,13 @@
 .profile-avatar{
     height: 200px;
     width: 200px;
+    border: 10px solid rgb(255, 255, 255);
+    border-radius: 50%;
 
 }
 
 .profile-avatar img{
-    border: 10px solid rgb(255, 255, 255);
+    /* border: 10px solid rgb(255, 255, 255); */
     border-radius: 50%;
     /* background-color: black; */
 }

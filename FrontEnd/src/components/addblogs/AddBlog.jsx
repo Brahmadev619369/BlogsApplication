@@ -99,6 +99,7 @@ console.log("addblogauth",auth);
     } else {
         console.error('Error submitting form:', error);
     }
+    
     }
   };
 
