@@ -48,7 +48,7 @@ function Cards() {
     <div className="mainContainer">
             <div className="seachBox">
        <label> <FaSearch/></label>
-        <input className='searchInput' type="text" value={query} onChange={e => setQuery(e.target.value)} />
+        <input className='searchInput' type="text" value={query} onChange={e => setQuery(e.target.value)} placeholder='Search by title'/>
       </div>
 
     <div className="cardcontainer">
