@@ -1,12 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
+.mainContainer{
+    min-height: calc(100vh - 170px);
+    margin-top: 10px;
+}
+
+.seachBox{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 5px 20px;
+    padding: 2px 15px;
+    gap: 2px;
+}
+
+.seachBox label{
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    padding: 8px;
+    border-radius:10px 0px 0px 10px;
+    border: 1px solid #ff5f6d;
+}
+
+.seachBox .searchInput{
+    width: 300px;
+    border-radius:0 10px 10px 0px;
+    border-color: #ff5f6d;
+    
+}
 
 .cardcontainer {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
     padding: 10px;
-    min-height: calc(100vh - 180px);
     margin: 10px 5px;
     align-items: flex-start;
     justify-content: center;
@@ -286,8 +313,9 @@ img {
 
     }
 
-    .cardFooter .category-div {
-        text-align: center;
+    .seachBox{
+        justify-content: center;
+
     }
 
 

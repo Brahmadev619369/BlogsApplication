@@ -114,7 +114,7 @@ function EditBlog() {
 
     return (
         <div className='addblog-container'>
-            <h2>Add Blog</h2>
+            <h2>Edit Blog</h2>
             <form className='form' onSubmit={handleSubmit}>
                 <div className="input-details">
                     <label htmlFor="title">Title</label>
